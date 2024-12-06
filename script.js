@@ -45,15 +45,15 @@ function displayFeed(sourceName, feedUrl) {
                 const feedHtml = limitedItems.map(item => {
                     // Get a longer preview of the description
                     const preview = item.description
-                        ? item.description.replace(/<\/?[^>]+(>|$)/g, "").slice(0, 300) + "..."
+                        ? item.description.replace(/<\/?[^>]+(>|$)/g, "").slice(0, 500) + "..."
                         : "No description available.";
 
                     return `
                         <div class="feed-item">
                             <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
-                            <p><strong>Published:</strong> ${item.pubDate}</p>
+                            <p>Published: <strong>${item.pubDate}</strong></p>
                             <p>${preview}</p>
-                            <a href="mailto:your@email.here?subject=${encodeURIComponent(item.title)}&body=${encodeURIComponent(item.link)}"
+                            <a href="mailto:test@hotmail.co.uk?subject=${encodeURIComponent(item.title)}&body=${encodeURIComponent(item.link)}"
                                class="email-button">
                                Email to Self
                             </a>
