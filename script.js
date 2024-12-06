@@ -42,17 +42,24 @@ function displayFeed(sourceName, feedUrl) {
         .then(data => {
             if (data.items && data.items.length > 0) {
                 const limitedItems = data.items.slice(0, 4); // Limit to 4 articles
-                const feedHtml = limitedItems.map(item => `
-                    <div class="feed-item">
-                        <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
-                        <p><strong>Published:</strong> ${item.pubDate}</p>
-                        <p>${item.description}</p>
-                        <a href="mailto:your@email.here?subject=${encodeURIComponent(item.title)}&body=${encodeURIComponent(item.link)}"
-                           class="email-button">
-                           Email to Self
-                        </a>
-                    </div>
-                `).join('');
+                const feedHtml = limitedItems.map(item => {
+                    // Get a longer preview of the description
+                    const preview = item.description
+                        ? item.description.replace(/<\/?[^>]+(>|$)/g, "").slice(0, 300) + "..."
+                        : "No description available.";
+
+                    return `
+                        <div class="feed-item">
+                            <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
+                            <p><strong>Published:</strong> ${item.pubDate}</p>
+                            <p>${preview}</p>
+                            <a href="mailto:your@email.here?subject=${encodeURIComponent(item.title)}&body=${encodeURIComponent(item.link)}"
+                               class="email-button">
+                               Email to Self
+                            </a>
+                        </div>
+                    `;
+                }).join('');
                 sourceContainer.innerHTML += feedHtml;
             } else {
                 sourceContainer.innerHTML += "<p>No items found in this feed.</p>";
