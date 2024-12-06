@@ -1,0 +1,12 @@
+{
+    "feeds": [
+        {
+            "name": "UK Supreme Court Blog",
+            "url": "https://ukscblog.com/feed/"
+        },
+        {
+            "name": "BBC News",
+            "url": "http://feeds.bbci.co.uk/news/rss.xml"
+        }
+    ]
+}
