@@ -29,7 +29,7 @@ function loadFeeds() {
 function displayFeed(sourceName, feedUrl) {
     const sourceContainer = document.createElement("div");
     sourceContainer.classList.add("feed-source");
-    sourceContainer.innerHTML = `<h2>${sourceName}</h2><p>Loading...</p>`;
+    sourceContainer.innerHTML = `<h2>${sourceName}</h2>`; // Add the feed name
     feedContainer.appendChild(sourceContainer);
 
     fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`)
@@ -47,13 +47,13 @@ function displayFeed(sourceName, feedUrl) {
                         <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
                         <p><strong>Published:</strong> ${item.pubDate}</p>
                         <p>${item.description}</p>
-                        <a href="mailto:test@hotmail.co.uk?subject=${encodeURIComponent(item.title)}&body=${encodeURIComponent(item.link)}"
+                        <a href="mailto:your@email.here?subject=${encodeURIComponent(item.title)}&body=${encodeURIComponent(item.link)}"
                            class="email-button">
                            Email to Self
                         </a>
                     </div>
                 `).join('');
-                sourceContainer.innerHTML = feedHtml;
+                sourceContainer.innerHTML += feedHtml;
             } else {
                 sourceContainer.innerHTML += "<p>No items found in this feed.</p>";
             }
