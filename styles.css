@@ -37,15 +37,19 @@ h1 {
 }
 
 .feed-item {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 }
 
-.feed-item h3 {
-    margin: 0;
-    font-size: 1.2em;
-    color: #007bff;
+.feed-item h3 a {
+    text-decoration: none;
+    color: #003366; /* Much darker blue */
+    font-weight: bold;
+}
+
+.feed-item h3 a:hover {
+    text-decoration: underline;
 }
 
 .feed-item p {
@@ -54,11 +58,24 @@ h1 {
     color: #555;
 }
 
-.feed-item a {
-    text-decoration: none;
-    color: #007bff;
+.feed-item strong {
+    font-weight: bold;
 }
 
-.feed-item a:hover {
-    text-decoration: underline;
+.email-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.email-button:hover {
+    background-color: #0056b3;
 }
