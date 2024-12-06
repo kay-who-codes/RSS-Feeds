@@ -45,13 +45,16 @@ function displayFeed(sourceName, feedUrl) {
                 const feedHtml = limitedItems.map(item => {
                     // Get a longer preview of the description
                     const preview = item.description
-                        ? item.description.replace(/<\/?[^>]+(>|$)/g, "").slice(0, 500) + "..."
+                        ? item.description.replace(/<\/?[^>]+(>|$)/g, "").slice(0, 300) + "..."
                         : "No description available.";
+
+                    // Format the publication date
+                    const formattedDate = formatDate(item.pubDate);
 
                     return `
                         <div class="feed-item">
                             <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
-                            <p>Published: <strong>${item.pubDate}</strong></p>
+                            <p><strong>Published:</strong> ${formattedDate}</p>
                             <p>${preview}</p>
                             <a href="mailto:test@hotmail.co.uk?subject=${encodeURIComponent(item.title)}&body=${encodeURIComponent(item.link)}"
                                class="email-button">
@@ -68,6 +71,23 @@ function displayFeed(sourceName, feedUrl) {
         .catch(error => {
             sourceContainer.innerHTML += `<p>Error: ${error.message}</p>`;
         });
+}
+
+// Format the publication date
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const options = {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true,
+    };
+    const formatted = new Intl.DateTimeFormat("en-GB", options).format(date);
+
+    // Customise the output to match the required format
+    return formatted.replace(",", "").replace("AM", "am").replace("PM", "pm").replace(" ", ", ");
 }
 
 // Load all feeds when the app starts
